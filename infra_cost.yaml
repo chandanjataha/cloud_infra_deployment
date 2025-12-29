@@ -1,6 +1,9 @@
 trigger: none
 
 stages: 
+#################################
+# Pre Commit - Liniting
+###################################
   - stage: PreCommit
     jobs:
     - job: SAST
@@ -10,7 +13,9 @@ stages:
       - task: tfsec@1
         inputs:
           version: 'v1.26.0'
-  
+#################################
+# Terraform Install and Plan
+###################################
   - stage: Install
     jobs:
     - job: terraformInstall
@@ -42,7 +47,9 @@ stages:
           command: 'plan'
           workingDirectory: '$(System.DefaultWorkingDirectory)/enviroments/dev'
           environmentServiceNameAzureRM: 'sp3'
-
+#################################
+# Cost and Impact Assement Stage
+###################################
 
   - stage: FinOps
     jobs:
